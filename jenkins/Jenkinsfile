@@ -43,8 +43,7 @@ agent none
           junit 'bugtracker-frontend/test-results.xml'
         }
       }   
-
+    }
   }
-
 }
 
