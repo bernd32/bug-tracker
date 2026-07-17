@@ -3,20 +3,25 @@ agent none
   stages {
     stage('Unit Tests - Backend') {
 
-    agent {
-      docker {
-        image 'snakee/golang-junit:1.21'
-        reuseNode true
-        /* 
-        Here /tmp is world-writable by default in most images, so this avoids 
-        the permission issue without relying on the workspace path
-        */
-        args '-e GOCACHE=/tmp/.cache/go-build -e GOPATH=/tmp/go'
+      agent {
+        docker {
+          image 'snakee/golang-junit:1.21'
+          reuseNode true
+          /* 
+          Here /tmp is world-writable by default in most images, so this avoids 
+          the permission issue without relying on the workspace path
+          */
+          args '-e GOCACHE=/tmp/.cache/go-build -e GOPATH=/tmp/go'
+        }
       }
-    }
-      steps {
-        dir('bugtracker-backend') {
-          sh 'go test -v ./...'
+        steps {
+          dir('bugtracker-backend') {
+            sh 'go test -v ./... 2>&1 | go-junit-report > report.xml'
+          }
+        }
+        post {
+          always {
+            junit 'bugtracker-backend/report.xml'
           }
         }
       }
