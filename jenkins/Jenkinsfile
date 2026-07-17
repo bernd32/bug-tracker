@@ -3,6 +3,7 @@ pipeline {
     docker {
       image 'snakee/golang-junit:1.21'
       reuseNode true
+      args '-e GOCACHE=/tmp/.cache/go-build -e GOPATH=/tmp/go'
     }
   }
 
