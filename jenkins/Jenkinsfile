@@ -1,5 +1,5 @@
 pipeline {
-agent none
+agent any
   stages {
     stage('Execute Unit Tests') {
       parallel {
@@ -81,9 +81,7 @@ agent none
 
   post {
     always {
-      node('any') {
         cleanWs()
-      }
     }
   }
 }
