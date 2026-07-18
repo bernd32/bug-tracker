@@ -17,7 +17,7 @@ agent none
         steps {
           dir('bugtracker-backend') {
             sh '''
-              go test -v ./... 2>&1 | go-junit-report > report.xml'
+              go test -v ./... 2>&1 | go-junit-report > report.xml
               
               # Testing coverage
               go test -coverprofile=coverage.out -covermode=atomic ./...
