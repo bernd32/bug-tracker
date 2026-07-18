@@ -9,14 +9,14 @@ services:
     ports:
       - "43815:3000"
     environment:
-      - NEXT_PUBLIC_API_URL=http://localhost:26152
+      - NEXT_PUBLIC_API_URL=http://localhost:3000
     depends_on:
       backend:
         condition: service_healthy
     networks:
       - bugtracker
     healthcheck:
-      test: ["CMD", "wget", "--spider", "http://localhost:43815"]
+      test: ["CMD", "wget", "--spider", "http://localhost:3000"]
       interval: 10s
       timeout: 5s
       retries: 3
@@ -31,7 +31,7 @@ services:
     networks:
       - bugtracker
     healthcheck:
-      test: ["CMD", "wget", "-O", "-", "http://localhost:26152/api/health"]
+      test: ["CMD", "wget", "-O", "-", "http://localhost:8080/api/health"]
       interval: 10s
       timeout: 5s
       retries: 3
