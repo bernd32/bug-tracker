@@ -81,7 +81,9 @@ agent none
 
   post {
     always {
-      cleanWs()
+      node('any') {
+        cleanWs()
+      }
     }
   }
 }
