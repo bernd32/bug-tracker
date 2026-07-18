@@ -7,16 +7,16 @@ services:
     build:
       context: ./bugtracker-frontend
     ports:
-      - "3000:3000"
+      - "43815:3000"
     environment:
-      - NEXT_PUBLIC_API_URL=http://localhost:8080
+      - NEXT_PUBLIC_API_URL=http://localhost:26152
     depends_on:
       backend:
         condition: service_healthy
     networks:
       - bugtracker
     healthcheck:
-      test: ["CMD", "wget", "--spider", "http://localhost:3000"]
+      test: ["CMD", "wget", "--spider", "http://localhost:43815"]
       interval: 10s
       timeout: 5s
       retries: 3
@@ -25,13 +25,13 @@ services:
     build:
       context: ./bugtracker-backend
     ports:
-      - "8080:8080"
+      - "26152:8080"
     volumes:
       - ./data:/app/data
     networks:
       - bugtracker
     healthcheck:
-      test: ["CMD", "wget", "-O", "-", "http://localhost:8080/api/health"]
+      test: ["CMD", "wget", "-O", "-", "http://localhost:26152/api/health"]
       interval: 10s
       timeout: 5s
       retries: 3
