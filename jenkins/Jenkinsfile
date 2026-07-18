@@ -22,7 +22,7 @@ agent none
               # Testing coverage
               go test -coverprofile=coverage.out -covermode=atomic ./...
               go tool cover -html=coverage.out -o coverage.html
-              mkdir reports
+              mkdir -p reports
               mv coverage.html reports/
               '''
           }
