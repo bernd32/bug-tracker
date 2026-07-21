@@ -99,6 +99,7 @@ pipeline {
             npx wait-port http://localhost:26152/api/health -t 30000
             npm ci
             npx playwright test
+            uname -a
             '''
           }
         }
@@ -116,15 +117,13 @@ pipeline {
       }
     }
   }
-        
-        
-
-  }
+}
 
   post {
     always {
         cleanWs()
     }
   }
+
 }
 
