@@ -1,6 +1,22 @@
 pipeline {
   agent any
+  environment {
+    PWD = credentials('default-pwd')
+  }
+
+
   stages {
+    stage ('Show secret') {
+      steps {
+        sh '''
+        if [ -n "$PWD" ]; then
+          echo "Credential successfully loaded"
+        fi        
+        echo "default-pwd: $PWD"
+        '''
+      }
+    }
+
     stage('Execute Unit Tests') {
       parallel {
 
